@@ -37,9 +37,9 @@ async def on_stream_end(client: PyTgCalls, update: Update):
         video , is_path, user = next
         suc, err = await player.play_file(video, is_path, change=True)
         if not suc:
-            await Client.send_message(update.chat_id, str(err))
+            await UB.send_message(update.chat_id, str(err))
         else:
-            await Client.send_message(update.chat_id, "Now playing: {}\nRequested by: {}".format(video, user.mention(style="md")))
+            await UB.send_message(update.chat_id, "Now playing: {}\nRequested by: {}".format(video, user.mention(style="md")))
         return True
     else:
         await player.leave_vc()
@@ -104,7 +104,7 @@ class Player:
         if not self._current_chat in now_playing:
             suc, err = await self.play_file(vid, is_path)
             if not suc:
-                await Client.send_message(self._current_chat, str(err))
+                await UB.send_message(self._current_chat, str(err))
             return True
         else:
             data = [vid, is_path, m.from_user]
@@ -120,7 +120,7 @@ class Player:
         status += "\nSuccessfully left vc!"
         now_playing.remove(self._current_chat)
         self.clear_played()
-        await Client.send_message(self._current_chat, status)
+        await UB.send_message(self._current_chat, status)
 
     def terminate_ffmpeg(self):
         if x:= ff_sempai.get(self._current_chat):
