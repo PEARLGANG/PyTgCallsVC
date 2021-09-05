@@ -1,5 +1,6 @@
-build: 
+build:
   docker:
-      worker: worker/Dockerfile
-run:
-  worker: python3 -m vcbot
+    release:
+       dockerfile: Dockerfile
+       target: builder
+    web: Dockerfile
