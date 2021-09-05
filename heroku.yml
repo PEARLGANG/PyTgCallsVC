@@ -1,5 +1,5 @@
 build: 
   docker:
-      worker: Dockerfile
+      worker: worker/Dockerfile
 run:
   worker: python3 -m vcbot
