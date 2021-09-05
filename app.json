@@ -23,15 +23,12 @@
         },
         "API_HASH": {
             "description": "Get this value from https://my.telegram.org"
-            "required": false
         },
         "SUDO": {
             "description": "User IDs of users who have access to use the bot commands. Separate each with space."
-            "required": false
         },
         "SESSION": {
             "description": "Get this value from https://replit.com/@ayrahikari/pyrogram-session-maker"
-            "required": false
         },
         "BOT_TOKEN": {
             "description": "Get this value from @BotFather",
