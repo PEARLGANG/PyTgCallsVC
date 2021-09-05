@@ -3,7 +3,3 @@ build:
     worker1: Dockerfile
 run:
   worker1: python3 -m vcbot
-  worker2:
-    command:
-      - python3 -m bot
-    image: worker1
