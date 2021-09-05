@@ -6,10 +6,10 @@ from pathlib import Path
 from pytgcalls import idle
 from vcbot import Bot, UB, group_calls
 from vcbot.config import Var
-from vcbot.plugins import play
+from vcbot.module import player
 loop = asyncio.get_event_loop()
 
-_path = f"vcbot/plugins/*.py"
+_path = f"vcbot/module/*.py"
 files = glob.glob(_path)
 
 def load_plugins(plugin_name):
