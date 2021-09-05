@@ -6,19 +6,19 @@ from pathlib import Path
 from pytgcalls import idle
 from vcbot import Bot, UB, group_calls
 from vcbot.config import Var
-from vcbot.module import player
+from vcbot.modules import player
 loop = asyncio.get_event_loop()
 
-_path = f"vcbot/module/*.py"
+_path = f"vcbot/modules/*.py"
 files = glob.glob(_path)
 
 def load_plugins(plugin_name):
-    path = Path(f"vcbot/plugins/{plugin_name}.py")
-    name = "vcbot.plugins.{}".format(plugin_name)
+    path = Path(f"vcbot/modules/{plugin_name}.py")
+    name = "vcbot.modules.{}".format(plugin_name)
     spec = importlib.util.spec_from_file_location(name, path)
     load = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(load)
-    sys.modules[f"vcbot.plugins." + plugin_name] = load
+    sys.modules[f"vcbot.modules." + plugin_name] = load
     print("Imported => " + plugin_name)
 
 async def client_start(bot=False):
