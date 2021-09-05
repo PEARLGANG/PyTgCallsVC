@@ -41,8 +41,8 @@ async def client_start(bot=False):
     if bot:
         print('             and Bot =>> {}'.format((await Bot.get_me()).first_name))
     print('-----------------------------------------------------')
-    await idle()
 
 if __name__ == '__main__':
     is_bot = bool(Var.BOT_TOKEN)
     loop.run_until_complete(client_start(bot=is_bot))
+idle()
