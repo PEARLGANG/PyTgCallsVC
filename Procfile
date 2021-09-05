@@ -1,1 +1,1 @@
-worker1: python3 -m vcbot
+worker: python3 -m vcbot
