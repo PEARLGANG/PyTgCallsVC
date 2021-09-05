@@ -3,7 +3,7 @@ import glob
 import asyncio
 import importlib
 from pathlib import Path
-from pytgcalls import idle
+from pyrogram import idle
 from vcbot import Bot, UB, group_calls
 from vcbot.config import Var
 from vcbot.modules import player
