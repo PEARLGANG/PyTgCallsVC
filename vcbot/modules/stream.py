@@ -7,7 +7,7 @@ from asyncio import sleep
 from pytgcalls.exceptions import GroupCallNotFound
 from vcbot.config import Var
 from pyrogram import filters, Client
-from vcbot.modules import Player
+from vcbot.player import Player
 from pyrogram.types import Message
 from vcbot import UB, to_delete, ff_sempai, group_calls
 from vcbot.helpers.utils import convert_to_stream, raw_converter, is_ytlive
