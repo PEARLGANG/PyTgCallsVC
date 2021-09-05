@@ -3,7 +3,7 @@ import time
 from vcbot.config import Var
 from pyrogram import filters, Client
 from datetime import datetime
-from vcbot.modules import Player
+from vcbot.player import Player
 from pyrogram.types import Message
 from vcbot import UB, to_delete, StartTime, group_calls
 from vcbot.helpers.utils import get_readable_time, is_ytlive
