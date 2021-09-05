@@ -10,4 +10,5 @@ RUN mkdir /py-tgcalls/
 WORKDIR /py-tgcalls/
 COPY . /py-tgcalls/
 RUN pip3 install -U -r requirements.txt
+RUN pip3 install py-tgcalls -U
 CMD python3 main.py
