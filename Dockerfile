@@ -1,5 +1,5 @@
 
-FROM python:3.9.7-slim-buster
+FROM python:3.8
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install git -y curl ffmpeg python3-pip opus-tools
 RUN pip3 install -U pip
