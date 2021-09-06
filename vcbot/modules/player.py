@@ -22,7 +22,7 @@ async def ping_msg_handler(_, m: Message):
 
 @UB.on_message(filters.user(Var.SUDO) & filters.command('play', '.'))
 async def play_msg_handler(_, m: Message):
-    await m.reply("Searching!")
+    status = await m.reply("Searching!")
     chat_id = m.chat.id
     player = Player(chat_id)
     is_file = False
@@ -48,7 +48,7 @@ async def play_msg_handler(_, m: Message):
         # todo
     if is_live:
         return await m.reply("Error: This is a live link.\nTip: use !stream command.")
-    status = await m.reply("Downloading...")
+    await status.edit("Downloading...")
     p = await player.play_or_queue(link, m, is_file)
     await status.edit("Streaming...!" if p else "Queued")
 
