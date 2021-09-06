@@ -82,7 +82,7 @@ class Player:
                     frame_rate=fps,
                 ),
             ),
-            stream_type=StreamType().local_stream,
+            stream_type=StreamType().pulse_stream
         )
         now_playing.append(self._current_chat)
 
@@ -101,9 +101,8 @@ class Player:
                     width=640,
                     height=360,
                     frame_rate=20,
-                ),
-            ),
-            stream_type=StreamType().local_stream
+                )
+            )
         )
         if not self._current_chat in now_playing:
             now_playing.append(self._current_chat)
