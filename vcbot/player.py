@@ -49,7 +49,7 @@ class Player:
     def __init__(self, chat_id):
         self._current_chat = chat_id
 
-    async def play_file(self, file, is_path=False, change=False, m: Message):
+    async def play_file(self, file, is_path=False, change=False):
         if not is_path:
             file, _ = await yt_download(file)
         else:
@@ -89,9 +89,9 @@ class Player:
                 InputVideoStream(
                     video,
                     VideoParameters(
-                        width=640,
-                        height=360,
-                        frame_rate=25,
+                        width=854,
+                        height=480,
+                        frame_rate=20,
                     ),
                 ),
                 stream_type=StreamType().local_stream,
