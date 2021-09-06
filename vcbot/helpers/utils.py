@@ -70,7 +70,7 @@ async def convert_to_stream(url: str):
     if stdout:
         return stdout.decode().strip()
 
-async def transcode(file_path: str, delete=True):
+async def transcode(file_path: str, delete=True, daemon=False):
     audio_f = generate_hash(5) + 'audio' + ".raw"
     video_f = generate_hash(5) + 'video' + ".raw"
     os.mkfifo(audio_f)
