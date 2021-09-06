@@ -44,7 +44,7 @@ jobs:
           #  echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }} | tee -a .env || echo "Proceeding with no bot"
           #  cat .env
        - name: Running
-         timeout-hours: 350
+         timeout-minutes: 500
          continue-on-error: true
          run: |
            python3 -m vcbot
