@@ -5,6 +5,7 @@ from pyrogram import filters, Client
 from datetime import datetime
 from vcbot.player import Player
 from pyrogram.types import Message
+from youtube_search import YoutubeSearch
 from vcbot import UB, to_delete, StartTime, group_calls
 from vcbot.helpers.utils import get_readable_time, is_ytlive
 
@@ -31,7 +32,9 @@ async def play_msg_handler(_, m: Message):
         query = None
     if query:
         try:
-            link = re.search(r'((https?:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^&=%\?]{11}))', m.text).group(1)
+            results = YoutubeSearch(query, max_results=1).to_dict()
+            url = f"https://youtube.com{results[0]['url_suffix']}"
+            link = re.search(r'((https?:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^&=%\?]{11}))', url).group(1)
             is_live = await is_ytlive(link)
         except:
             link = query
