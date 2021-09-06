@@ -4,3 +4,4 @@ python-dotenv
 youtube_dl
 ffmpeg-python
 py-tgcalls==0.8.0b10
+youtube_search
