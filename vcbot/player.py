@@ -73,7 +73,7 @@ class Player:
                     VideoParameters(
                         width=640,
                         height=360,
-                        frame_rate=22,
+                        frame_rate=20,
                     )
                 )
             )
