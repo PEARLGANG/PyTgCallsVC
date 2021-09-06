@@ -3,7 +3,7 @@ on:
     schedule:
       - cron: "0 */6 * * *"
     push:
-      branches: [ beta ]
+      branches: [ master ]
     workflow_dispatch:
     
 env:
@@ -44,8 +44,8 @@ jobs:
           #  echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }} | tee -a .env || echo "Proceeding with no bot"
           #  cat .env
        - name: Running
-         timeout-minutes: 350
+         timeout-hours: 350
          continue-on-error: true
          run: |
            python3 -m vcbot
-           echo "Bot Died"
+           echo "Magic Happened!!!!"
