@@ -136,7 +136,7 @@ async def yt_download(ytlink, m: Message):
         if not res:
             res = await get_backdrop_res(ytlink)
         ydl.process_info(info_dict)
-        await m.reply(ydl.process_info(info_dict))
+        await m.send_message(ydl.process_info(info_dict))
         _file = ydl.prepare_filename(info_dict)
         return _file, res
 
