@@ -73,10 +73,10 @@ class Player:
                     VideoParameters(
                         width=640,
                         height=360,
-                        frame_rate=22,
+                        frame_rate=20,
                     ),
                 ),
-                stream_type=StreamType().pulse_stream,
+                stream_type=StreamType().local_stream,
             )
         else:
             await group_calls.join_group_call(
@@ -92,10 +92,10 @@ class Player:
                     VideoParameters(
                         width=640,
                         height=360,
-                        frame_rate=22,
+                        frame_rate=20,
                     ),
                 ),
-                stream_type=StreamType().pulse_stream,
+                stream_type=StreamType().local_stream,
             )
         now_playing.append(self._current_chat)
         return True, None
