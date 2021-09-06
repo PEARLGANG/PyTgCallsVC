@@ -56,7 +56,7 @@ async def stream_msg_handler(_, m: Message):
             VideoParameters(
                 width=864,
                 height=480,
-                frame_rate=24,
+                frame_rate=25, 
             ),
         ),
         stream_type=StreamType().pulse_stream,
