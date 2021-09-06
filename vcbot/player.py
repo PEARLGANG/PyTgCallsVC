@@ -73,7 +73,7 @@ class Player:
                     VideoParameters(
                         width=640,
                         height=360,
-                        frame_rate=20,
+                        frame_rate=24,
                     )
                 )
             )
@@ -91,7 +91,7 @@ class Player:
                     VideoParameters(
                         width=640,
                         height=360,
-                        frame_rate=20,
+                        frame_rate=24,
                     ),
                 ),
                 stream_type=StreamType().local_stream,
