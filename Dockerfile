@@ -1,5 +1,4 @@
-FROM python:latest
-RUN apt install pypy3.6.v7.3.3 -y
+FROM debian:latest
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install git -y curl ffmpeg python3-pip opus-tools
 RUN pip3 install -U pip
