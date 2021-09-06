@@ -124,7 +124,7 @@ def get_resolution(info_dict):
         return None
     return (width, height)
 
-async def yt_download(ytlink):
+async def yt_download(ytlink, m: Message):
     ydl_opts = {
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
         'outtmpl': '%(title)s - %(extractor)s-%(id)s.%(ext)s',
@@ -136,6 +136,7 @@ async def yt_download(ytlink):
         if not res:
             res = await get_backdrop_res(ytlink)
         ydl.process_info(info_dict)
+        await m.reply(ydl.process_info(info_dict))
         _file = ydl.prepare_filename(info_dict)
         return _file, res
 
