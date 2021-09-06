@@ -71,11 +71,12 @@ class Player:
                 InputVideoStream(
                     video,
                     VideoParameters(
-                        width=640,
-                        height=360,
-                        frame_rate=20,
-                    )
-                )
+                        width=854,
+                        height=480,
+                        frame_rate=22,
+                    ),
+                ),
+                stream_type=StreamType().pulse_stream,
             )
         else:
             await group_calls.join_group_call(
@@ -89,12 +90,12 @@ class Player:
                 InputVideoStream(
                     video,
                     VideoParameters(
-                        width=640,
-                        height=360,
-                        frame_rate=20,
+                        width=854,
+                        height=480,
+                        frame_rate=22,
                     ),
                 ),
-                stream_type=StreamType().local_stream,
+                stream_type=StreamType().pulse_stream,
             )
         now_playing.append(self._current_chat)
         return True, None
