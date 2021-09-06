@@ -42,7 +42,7 @@ async def stream_msg_handler(_, m: Message):
     proc = raw_converter(stream_url, vid, audio)
     ff_sempai[m.chat.id] = proc
     while not os.path.exists(vid) and not os.path.exists(audio):
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(0.125)
     await group_calls.join_group_call(
         m.chat.id,
         InputAudioStream(
@@ -54,9 +54,9 @@ async def stream_msg_handler(_, m: Message):
         InputVideoStream(
             vid,
             VideoParameters(
-                width=640,
-                height=360,
-                frame_rate=25, 
+                width=854,
+                height=480,
+                frame_rate=22, 
             ),
         ),
         stream_type=StreamType().pulse_stream,
