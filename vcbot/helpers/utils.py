@@ -1,9 +1,21 @@
 import os
 import json
 import asyncio
+import random
+import string
 import subprocess
 from youtube_dl import YoutubeDL
 from pyrogram.types import Message
+
+
+def generate_hash(N=7):
+    return ''.join(
+        random.choices(
+            string.ascii_uppercase +
+            string.digits, k = N
+        )
+    )
+
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -59,24 +71,32 @@ async def convert_to_stream(url: str):
         return stdout.decode().strip()
 
 async def transcode(file_path: str, delete=True):
-    audio_f = file_path.split(".")[0] + 'audio' + ".raw"
-    video_f = file_path.split(".")[0] + 'video' + ".raw"
-    if (os.path.isfile(audio_f) and (os.path.isfile(video_f))):
-        return audio_f, video_f
-    cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", file_path, "-f", "s16le", "-ac", "1", "-ar", "48000", audio_f, "-f", "rawvideo", '-r', '22', '-pix_fmt', 'yuv420p', '-vf', 'scale=640:-1', video_f]
-    proc = await asyncio.create_subprocess_exec(
-        *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    await proc.communicate()
-    if proc.returncode != 0:
-        print(f"Transcode failed for {file_path}")
-        return None
+    audio_f = generate_hash(5) + 'audio' + ".raw"
+    video_f = generate_hash(5) + 'video' + ".raw"
+    os.mkfifo(audio_f)
+    os.mkfifo(video_f)
+    cmd = ["ffmpeg", "-hide_banner", "-y", "-i", file_path, "-f", "s16le", "-ac", "1", "-ar", "48000", audio_f, "-f", "rawvideo", '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=640:-1', video_f]
+    if daemon:
+        proc = subprocess.Popen(
+            cmd,
+            stdin=None,
+            stdout=None,
+            stderr=None,
+            cwd=None,
+        )
+        proc.communicate()
+
+    else:
+        proc = await asyncio.create_subprocess_exec(
+            *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+        )
+        await proc.communicate()
     if delete:
         try:
             os.remove(file_path)
         except BaseException:
             ...
-    return audio_f, video_f
+    return audio_f, video_f, proc
 
 async def get_video_info(filename):
     proc = await asyncio.create_subprocess_exec('ffprobe', '-hide_banner', '-print_format', 'json', '-show_format', '-show_streams', filename, stdout=asyncio.subprocess.PIPE)
