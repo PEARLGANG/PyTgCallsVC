@@ -65,7 +65,7 @@ class Player:
             await self.join_play(video, audio)
         return True, None
 
-    async def join_play(self, video, audio, width=640, height=360, fps=20, bitrate=48000):
+    async def join_play(self, video, audio, width=640, height=360, fps=22, bitrate=48000):
         await group_calls.join_group_call(
             self._current_chat,
             InputAudioStream(
@@ -86,7 +86,7 @@ class Player:
         )
         now_playing.append(self._current_chat)
 
-    async def change_source(self, video, audio, width=640, height=360, fps=20, bitrate=48000):
+    async def change_source(self, video, audio, width=640, height=360, fps=22, bitrate=48000):
         await group_calls.change_stream(
             self._current_chat,
             InputAudioStream(
@@ -100,9 +100,10 @@ class Player:
                 VideoParameters(
                     width=640,
                     height=360,
-                    frame_rate=20,
-                )
-            )
+                    frame_rate=22,
+                ),
+            ),
+            stream_type=StreamType().local_stream
         )
         if not self._current_chat in now_playing:
             now_playing.append(self._current_chat)
