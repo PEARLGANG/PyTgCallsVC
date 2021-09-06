@@ -74,9 +74,8 @@ class Player:
                         width=640,
                         height=360,
                         frame_rate=20,
-                    ),
-                ),
-                stream_type=StreamType().local_stream,
+                    )
+                )
             )
         else:
             await group_calls.join_group_call(
