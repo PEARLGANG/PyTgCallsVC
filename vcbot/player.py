@@ -49,7 +49,7 @@ class Player:
     def __init__(self, chat_id):
         self._current_chat = chat_id
 
-    async def play_file(self, file, is_path=False, change=False, m:Message):
+    async def play_file(self, file, is_path=False, change=False, m: Message):
         if not is_path:
             file, _ = await yt_download(file)
         else:
