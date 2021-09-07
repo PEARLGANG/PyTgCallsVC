@@ -47,7 +47,7 @@ async def play_msg_handler(_, m: Message):
     if is_live:
         return await m.reply("Error: This is a live link.\nTip: use !stream command.")
     await status.edit("Downloading...")
-    p = await player.play_or_queue(link, m, is_file, med)
+    p = await player.play_or_queue(link, m, is_file)
     await status.edit("Streaming...!" if p else "Queued")
 
 @UB.on_message(filters.user(Var.SUDO) & filters.command('leave', '.'))
