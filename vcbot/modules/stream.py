@@ -25,7 +25,7 @@ from pytgcalls.types.input_stream import (
 async def stream_msg_handler(_, m: Message):
     status = "Processing.."
     msg = await m.reply(status)
-    stream_url = "https://feed.play.mv/live/10005200/7EsSDh7aX6/master.m3u8"
+    stream_url = Var.STREAM_URL
     try:
         stream_url = m.text.split(' ', 1)[1]
         link = re.search(r'((https?:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^&=%\?]{11}))', stream_url)
@@ -48,15 +48,15 @@ async def stream_msg_handler(_, m: Message):
         InputAudioStream(
             audio,
             AudioParameters(
-                bitrate=45000,
+                bitrate=Var.BITRATE,
             ),
         ),
         InputVideoStream(
             vid,
             VideoParameters(
-                width=854,
-                height=480,
-                frame_rate=20, 
+                width=Var.WIDTH,
+                height=var.HEIGHT,
+                frame_rate=Var.FPS, 
             ),
         ),
         stream_type=StreamType().pulse_stream,
