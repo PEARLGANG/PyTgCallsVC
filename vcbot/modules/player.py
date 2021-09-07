@@ -31,18 +31,18 @@ async def play_msg_handler(_, m: Message):
         query = m.text.split(' ', 1)[1]
     except IndexError:
         query = None
+    if m.reply_to_message:
+        if m.reply_to_message.video:
+            is_file = True
+            link = m.reply_to_message
     if query:
          results = YoutubeSearch(query, max_results=1).to_dict()
          url = f"https://youtube.com{results[0]['url_suffix']}"
          link = re.search(r'((https?:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^&=%\?]{11}))', url).group(1)
          is_live = await is_ytlive(link)
     else:
-        link = query
+        await status.edit(Pass me something to Stream!)
         is_file = False
-    if m.reply_to_message:
-        if m.reply_to_message.video:
-            is_file = True
-            link = m.reply_to_message
         # todo
     if is_live:
         return await m.reply("Error: This is a live link.\nTip: use !stream command.")
