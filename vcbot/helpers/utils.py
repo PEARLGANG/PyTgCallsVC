@@ -2,6 +2,7 @@ import os
 import json
 import asyncio
 import subprocess
+from vcbot.config import Var
 from youtube_dl import YoutubeDL
 from pyrogram.types import Message
 
@@ -30,13 +31,14 @@ def get_readable_time(seconds: int) -> str:
 
 def raw_converter(source, vid, audio, log_file='ffmpeg.log'):
     # log_file = open(log_file, 'w')
-    cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", source, "-f", "s16le", "-ac", "1", "-ar", "45000", audio, "-f", "rawvideo", '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:-1', vid]
+    cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", source, "-f", "s16le", "-ac", "1", "-ar", "Var.BITRATE", audio, "-f", "rawvideo", '-r', 'Var.FPS', '-pix_fmt', 'yuv420p', '-vf', 'scale=Var.WIDTH:-1', vid]
     return subprocess.Popen(
         cmd,
         stdin=None,
         stdout=None,
         stderr=None,
         cwd=None,
+        universal_newlines=True,
     )
 
 async def is_ytlive(url):
@@ -63,9 +65,9 @@ async def transcode(file_path: str, delete=True):
     video_f = file_path.split(".")[0] + 'video' + ".raw"
     if (os.path.isfile(audio_f) and (os.path.isfile(video_f))):
         return audio_f, video_f
-    cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", file_path, "-f", "s16le", "-ac", "1", "-ar", "45000", audio_f, "-f", "rawvideo", '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:-1', video_f]
+    cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", file_path, "-f", "s16le", "-ac", "1", "-ar", "Var.BITRATE", audio_f, "-f", "rawvideo", '-r', 'Var.FPS', '-pix_fmt', 'yuv420p', '-vf', 'scale=Var.WIDTH:-1', video_f]
     proc = await asyncio.create_subprocess_exec(
-        *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+        *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE, universal_newlines=True
     )
     await proc.communicate()
     if proc.returncode != 0:
@@ -137,7 +139,7 @@ def my_hook(self, d):
 
 async def yt_download(ytlink):
     ydl_opts = {
-        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
+        'format': f'bestvideo[height<={Var.HEIGHT},ext=mp4]+bestaudio[ext=m4a]',
         'outtmpl': '%(title)s - %(extractor)s-%(id)s.%(ext)s',
         'writethumbnail': False,
         'progress_hook': [my_hook]
