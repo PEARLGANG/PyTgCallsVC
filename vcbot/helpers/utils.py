@@ -38,7 +38,6 @@ def raw_converter(source, vid, audio, log_file='ffmpeg.log'):
         stdout=None,
         stderr=None,
         cwd=None,
-        universal_newlines=False,
     )
 
 async def is_ytlive(url):
@@ -67,7 +66,7 @@ async def transcode(file_path: str, delete=True):
         return audio_f, video_f
     cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", file_path, "-f", "s16le", "-ac", "1", "-ar", "Var.BITRATE", audio_f, "-f", "rawvideo", '-r', 'Var.FPS', '-pix_fmt', 'yuv420p', '-vf', 'scale=Var.WIDTH:-1', video_f]
     proc = await asyncio.create_subprocess_exec(
-        *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE, universal_newlines=False
+        *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
     await proc.communicate()
     if proc.returncode != 0:
