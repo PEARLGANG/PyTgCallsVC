@@ -48,14 +48,14 @@ async def stream_msg_handler(_, m: Message):
         InputAudioStream(
             audio,
             AudioParameters(
-                bitrate=48000,
+                bitrate=45000,
             ),
         ),
         InputVideoStream(
             vid,
             VideoParameters(
-                width=1280,
-                height=720,
+                width=854,
+                height=480,
                 frame_rate=20, 
             ),
         ),
