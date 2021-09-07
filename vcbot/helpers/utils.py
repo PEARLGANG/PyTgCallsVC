@@ -124,11 +124,23 @@ def get_resolution(info_dict):
         return None
     return (width, height)
 
+
+def my_hook(self, d):
+    if d['status'] == 'finished':
+        file_tuple = os.path.split(os.path.abspath(d['filename']))
+        print("Done downloading {}".format(file_tuple[1]))
+    if d['status'] == 'downloading':
+        p = d['_percent_str']
+        p = p.replace('%','')
+        self.progress.setValue(float(p))
+        print(d['filename'], d['_percent_str'], d['_eta_str'])
+
 async def yt_download(ytlink):
     ydl_opts = {
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
         'outtmpl': '%(title)s - %(extractor)s-%(id)s.%(ext)s',
         'writethumbnail': False
+        'progress_hook': [my_hook]
     }
     with YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(ytlink, download=False)
