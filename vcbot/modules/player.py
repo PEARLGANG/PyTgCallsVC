@@ -38,8 +38,6 @@ async def play_msg_handler(_, m: Message):
          is_live = await is_ytlive(link)
     else:
         link = query
-            ...
-
         is_file = False
     if m.reply_to_message:
         if m.reply_to_message.video:
