@@ -36,7 +36,7 @@ async def play_msg_handler(_, m: Message):
             is_file = True
             file_name = f'{m.chat.id}.{video.file_name.split(".", 1)[-1]}'
             dl = await message.reply_to_message.download(file_name)
-            link = dl
+            link = video
     if query:
          results = YoutubeSearch(query, max_results=1).to_dict()
          url = f"https://youtube.com{results[0]['url_suffix']}"
