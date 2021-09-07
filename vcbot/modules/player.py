@@ -32,7 +32,6 @@ async def play_msg_handler(_, m: Message):
     except IndexError:
         query = None
     video = (message.reply_to_message.video or message.reply_to_message.document) if message.reply_to_message else None
-    url = get_url(message)
     if video and (video.file_name.endswith('.mkv') or video.file_name.endswith('.mp4')):
             is_file = True
             file_name = f'{m.chat.id}.{video.file_name.split(".", 1)[-1]}'
