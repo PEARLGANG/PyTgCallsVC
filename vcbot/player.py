@@ -3,6 +3,7 @@ import time
 import signal
 import asyncio
 import subprocess
+from vcbot.config import Var
 from pyrogram import Client
 from pytgcalls import StreamType
 from pyrogram.types import Message
@@ -65,7 +66,7 @@ class Player:
             await self.join_play(video, audio)
         return True, None
 
-    async def join_play(self, video, audio, width=854, height=480, fps=20, bitrate=45000):
+    async def join_play(self, video, audio, width=Var.WIDTH, height=Var.HEIGHT, fps=Var.FPS, bitrate=Var.BITRATE):
         await group_calls.join_group_call(
             self._current_chat,
             InputAudioStream(
@@ -86,21 +87,21 @@ class Player:
         )
         now_playing.append(self._current_chat)
 
-    async def change_source(self, video, audio, width=854, height=480, fps=20, bitrate=45000):
+    async def change_source(self, video, audio, width=Var.WIDTH, height=Var.HEIGHT, fps=Var.FPS, bitrate=Var.BITRATE):
         await group_calls.change_stream(
             self._current_chat,
             InputAudioStream(
                 audio,
                 AudioParameters(
-                    bitrate=45000
+                    bitrate=bitrate
                 ),
             ),
             InputVideoStream(
                 video,
                 VideoParameters(
-                    width=854,
-                    height=480,
-                    frame_rate=20,
+                    width=width,
+                    height=height,
+                    frame_rate=fps,
                 )
             )
         )
