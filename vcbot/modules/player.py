@@ -41,11 +41,11 @@ async def play_msg_handler(_, m: Message):
          link = re.search(r'((https?:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^&=%\?]{11}))', url).group(1)
          is_live = await is_ytlive(link)
     else:
-        return await status.edit(Pass me something to Stream!)
+        return await status.edit("Pass me something to Stream!")
         is_file = False
         # todo
     if is_live:
-        return await m.reply("Error: This is a live link.\nTip: use !stream command.")
+         await m.reply("Error: This is a live link.\nTip: use !stream command.")
     await status.edit("Downloading...")
     p = await player.play_or_queue(link, m, is_file)
     await status.edit("Streaming...!" if p else "Queued")
