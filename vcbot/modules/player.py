@@ -32,16 +32,15 @@ async def play_msg_handler(_, m: Message):
     except IndexError:
         query = None
     if query:
-        if:
-            results = YoutubeSearch(query, max_results=1).to_dict()
-            url = f"https://youtube.com{results[0]['url_suffix']}"
-            link = re.search(r'((https?:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^&=%\?]{11}))', url).group(1)
-            is_live = await is_ytlive(link)
-        else:
-            link = query
+         results = YoutubeSearch(query, max_results=1).to_dict()
+         url = f"https://youtube.com{results[0]['url_suffix']}"
+         link = re.search(r'((https?:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/|v\/|.+\?v=)?([^&=%\?]{11}))', url).group(1)
+         is_live = await is_ytlive(link)
+    else:
+        link = query
             ...
-        is_file = False
-    if m.reply_to_message:
+    is_file = False
+    elif m.reply_to_message:
         if m.reply_to_message.video:
             is_file = True
             med = m.reply_to_message
