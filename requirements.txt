@@ -2,6 +2,6 @@ git+https://github.com/pyrogram/pyrogram@master
 TgCrypto==1.2.2
 python-dotenv
 youtube_dl
-ffmpeg-python
+ffmpeg
 py-tgcalls==0.8.0b11
 youtube_search
