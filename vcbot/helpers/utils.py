@@ -139,7 +139,7 @@ async def yt_download(ytlink):
     ydl_opts = {
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
         'outtmpl': '%(title)s - %(extractor)s-%(id)s.%(ext)s',
-        'writethumbnail': False
+        'writethumbnail': False,
         'progress_hook': [my_hook]
     }
     with YoutubeDL(ydl_opts) as ydl:
