@@ -140,5 +140,5 @@ async def yt_download(ytlink):
         return _file, res
 
 async def tg_download(m: Message):
-    path = await m.reply_to_message.download()
+    path = await m.download()
     return path
