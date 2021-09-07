@@ -35,7 +35,7 @@ async def play_msg_handler(_, m: Message):
     if video and (video.file_name.endswith('.mkv') or video.file_name.endswith('.mp4')):
             is_file = True
             file_name = f'{video.file_unique_id}.{video.file_name.split(".", 1)[-1]}'
-            link = file_name
+            link = m.reply_to_message
     else:
          results = YoutubeSearch(query, max_results=1).to_dict()
          url = f"https://youtube.com{results[0]['url_suffix']}"
