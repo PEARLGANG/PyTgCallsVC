@@ -13,4 +13,4 @@ class Var(object):
     WIDTH = int(getenv('WIDTH', 854))
     HEIGHT = int(getenv('HEIGHT', 480))
     BITRATE = int(getenv('BITRATE', 45000)) 
-    STREAM_URL = int(getenv('STREAM_URL'))
+    STREAM_URL = int(getenv('URL'))
