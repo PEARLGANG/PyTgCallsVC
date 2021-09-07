@@ -30,7 +30,7 @@ def get_readable_time(seconds: int) -> str:
 
 def raw_converter(source, vid, audio, log_file='ffmpeg.log'):
     # log_file = open(log_file, 'w')
-    cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", source, "-f", "s16le", "-ac", "1", "-ar", "48000", audio, "-f", "rawvideo", '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=1280:-1', vid]
+    cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", source, "-f", "s16le", "-ac", "1", "-ar", "45000", audio, "-f", "rawvideo", '-r', '20', '-pix_fmt', 'yuv420p', '-vf', 'scale=854:-1', vid]
     return subprocess.Popen(
         cmd,
         stdin=None,
