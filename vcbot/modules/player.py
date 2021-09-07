@@ -39,8 +39,8 @@ async def play_msg_handler(_, m: Message):
     else:
         link = query
             ...
-    is_file = False
 
+        is_file = False
     if m.reply_to_message:
         if m.reply_to_message.video:
             is_file = True
