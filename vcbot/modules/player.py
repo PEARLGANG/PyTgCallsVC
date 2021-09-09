@@ -31,10 +31,10 @@ async def play_msg_handler(_, m: Message):
         query = m.text.split(' ', 1)[1]
     except IndexError:
         query = None
-    video = (m.reply_to_message.video or m.reply_to_message.document) if m.reply_to_message else None
-    if video and (video.file_name.endswith('.mkv') or video.file_name.endswith('.mp4')):
+
+    if m.reply_to_message:
+        if m.reply_to_message.video:
             is_file = True
-            file_name = f'{video.file_unique_id}.{video.file_name.split(".", 1)[-1]}'
             link = m.reply_to_message
     else:
          results = YoutubeSearch(query, max_results=1).to_dict()
