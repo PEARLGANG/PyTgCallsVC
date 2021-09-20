@@ -85,7 +85,7 @@ class Player:
                     frame_rate=fps,
                 ),
             ),
-            )
+            ),
             stream_type=StreamType().pulse_stream
         )
         now_playing.append(self._current_chat)
@@ -108,7 +108,7 @@ class Player:
                     frame_rate=fps,
                 ),
             ),
-            )
+            ),
             stream_type=StreamType().pulse_stream
         )
         if not self._current_chat in now_playing:
