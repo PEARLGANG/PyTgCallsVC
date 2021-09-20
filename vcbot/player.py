@@ -15,7 +15,8 @@ from pytgcalls.types.input_stream import (
     VideoParameters,
     AudioParameters,
     InputAudioStream,
-    InputVideoStream
+    InputVideoStream,
+    InputStream
 )
 #
 # base from https://github.com/TeamUltroid/Ultroid/blob/dev/vcbot/__init__.py
@@ -92,10 +93,11 @@ class Player:
     async def change_source(self, video, audio, width=Var.WIDTH, height=Var.HEIGHT, fps=Var.FPS, bitrate=Var.BITRATE):
         await group_calls.change_stream(
             self._current_chat,
-            InputAudioStream(
+            InputStream(
+              InputAudioStream(
                 audio,
                 AudioParameters(
-                    bitrate=bitrate
+                    bitrate=bitrate,
                 ),
             ),
             InputVideoStream(
@@ -104,8 +106,10 @@ class Player:
                     width=width,
                     height=height,
                     frame_rate=fps,
-                )
+                ),
+            ),
             )
+            stream_type=StreamType().pulse_stream
         )
         if not self._current_chat in now_playing:
             now_playing.append(self._current_chat)
