@@ -9,8 +9,8 @@ class Var(object):
     BOT_TOKEN = getenv('BOT_TOKEN')
     SESSION = str(getenv('SESSION'))
     SUDO =  list(int(x) for x in getenv('SUDO', '').split())
-    FPS = int(getenv('FPS', 18))
+    FPS = int(getenv('FPS', 20))
     WIDTH = int(getenv('WIDTH', 854))
     HEIGHT = int(getenv('HEIGHT', 480))
-    BITRATE = int(getenv('BITRATE', 45000)) 
+    BITRATE = int(getenv('BITRATE', 48000)) 
     STREAM_URL = "https://feed.play.mv/live/10005200/7EsSDh7aX6/master.m3u8"
