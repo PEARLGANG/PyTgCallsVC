@@ -3,5 +3,5 @@ TgCrypto==1.2.2
 python-dotenv
 youtube_dl
 ffmpeg
-py-tgcalls==0.8.1b17
+py-tgcalls==0.8.1b23
 youtube_search
